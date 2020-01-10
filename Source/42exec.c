@@ -304,6 +304,9 @@ long SimStep(void)
 
       /* Read and Interpret Command Script File */
       CmdInterpreter();
+	  
+	  /* Field any real-time commands from the socket interface */
+	  FieldRealTimeCommands();
 
       /* Update Dynamics to next Timestep */
       for(Isc=0;Isc<Nsc;Isc++) {
@@ -318,6 +321,10 @@ long SimStep(void)
       #ifdef _ENABLE_SOCKETS_
          InterProcessComm(); /* Send and receive from external processes */
       #endif
+	  
+	  /* Send simulation states to remote clients */
+	  SendSimStatesToUdpClients();
+	  
       Ephemerides(); /* Sun, Moon, Planets, Spacecraft, Useful Auxiliary Frames */
       ZeroFrcTrq();
       for(Isc=0;Isc<Nsc;Isc++) {

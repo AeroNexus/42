@@ -182,13 +182,13 @@ ifneq ($(strip $(GMSECFLAG)),)
    ACIPCOBJ = $(OBJ)AppReadFromFile.o $(OBJ)AppWriteToGmsec.o $(OBJ)AppReadFromGmsec.o \
       $(OBJ)AppWriteToSocket.o $(OBJ)AppReadFromSocket.o $(OBJ)AppWriteToFile.o 
    SIMIPCOBJ = $(OBJ)SimWriteToFile.o $(OBJ)SimWriteToGmsec.o $(OBJ)SimWriteToSocket.o \
-      $(OBJ)SimReadFromFile.o $(OBJ)SimReadFromGmsec.o $(OBJ)SimReadFromSocket.o 
+      $(OBJ)SimReadFromFile.o $(OBJ)SimReadFromGmsec.o $(OBJ)SimReadFromSocket.o $(OBJ)LooselyCoupledFswIF.o
 else
    GMSECOBJ =
    ACIPCOBJ = $(OBJ)AppReadFromFile.o \
       $(OBJ)AppWriteToSocket.o $(OBJ)AppReadFromSocket.o $(OBJ)AppWriteToFile.o 
    SIMIPCOBJ = $(OBJ)SimWriteToFile.o $(OBJ)SimWriteToSocket.o \
-      $(OBJ)SimReadFromFile.o $(OBJ)SimReadFromSocket.o 
+      $(OBJ)SimReadFromFile.o $(OBJ)SimReadFromSocket.o $(OBJ)LooselyCoupledFswIF.o
 endif
 
 42OBJ = $(OBJ)42main.o $(OBJ)42exec.o $(OBJ)42actuators.o $(OBJ)42cmd.o \
@@ -354,8 +354,12 @@ $(OBJ)AppReadFromGmsec.o  : $(IPCSRC)AppReadFromGmsec.c $(INC)42.h $(INC)AcTypes
 $(OBJ)AppReadFromSocket.o  : $(IPCSRC)AppReadFromSocket.c $(INC)42.h $(INC)AcTypes.h
 	$(CC) $(CFLAGS) -c $(IPCSRC)AppReadFromSocket.c -o $(OBJ)AppReadFromSocket.o
 
+$(OBJ)LooselyCoupledFswIF.o  : $(IPCSRC)LooselyCoupledFswIF.c $(INC)42.h $(INC)AcTypes.h
+	$(CC) $(CFLAGS) -c $(IPCSRC)LooselyCoupledFswIF.c -o $(OBJ)LooselyCoupledFswIF.o
+
 $(OBJ)42nos3.o         : $(SRC)42nos3.c 
 	$(CC) $(CFLAGS) -c $(SRC)42nos3.c -o $(OBJ)42nos3.o  
+ 
 
 ########################  Miscellaneous Rules  ############################
 clean :
