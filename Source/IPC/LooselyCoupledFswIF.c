@@ -1,6 +1,6 @@
 /*************************************************************************
 *
-*   LooselyCOupledFswIF.c
+*   LooselyCoupledFswIF.c
 *   Authored by Ken Center, Orbit Logic, Inc.
 *
 *   Contributed to the GitHub Open Source project /ericstoneking/42
