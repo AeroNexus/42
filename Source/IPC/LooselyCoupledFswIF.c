@@ -1,6 +1,6 @@
 /*************************************************************************
 *
-*   MISDEF_IPC.c
+*   LooselyCOupledFswIF.c
 *   Authored by Ken Center, Orbit Logic, Inc.
 *
 *   Contributed to the GitHub Open Source project /ericstoneking/42
