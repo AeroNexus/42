@@ -61,6 +61,7 @@ const int ATT_MODE_MSG_ID = 3;
 #define ATT_MODE_COAST 3
 #define ATT_MODE_CONVERGED 5
 
+const double TIME_SYNC_TOLERANCE = 10.0; // Time can be off this much(seconds)from sync source
 const double ATT_CONVERGED_TOL = 0.025;   // Criteria for attitude convergence (radians)
 const double RATE_CONVERGED_TOL = 0.0025; // Criteria for attitude rate converngence (radians/sec)
 
@@ -191,7 +192,9 @@ void FieldRealTimeCommands(void) // UDP server handling multiple clients sending
 		double Qj = 0;
 		double Qk = 0;
 		double Qs = 0;
+		double NewSimTime = 0; // GPS Epoch
 		#define CMD_ID_SET_LVLH_QUAT  100
+		#define CMD_ID_SET_SIM_TIME   101
 		
 		//printf("Scanning socket for Formatted RT Cmds...\n");	
 		if(FmtRtCmdSock>=0) 
@@ -224,6 +227,24 @@ void FieldRealTimeCommands(void) // UDP server handling multiple clients sending
 						knownCmd = TRUE; // Command is known and validated
 						attitudeMode[ScId].current = ATT_MODE_COMMANDED; // Transition mode for this S/C to COAST
 						attitudeMode[ScId].count = 0;
+					break;
+					case CMD_ID_SET_SIM_TIME:
+						printf("Command -> CMD_ID_SET_SIM_TIME\n");
+						sscanf((char*)Msg, "%d,%lf", &CmdId, &NewSimTime);
+						printf("    Time Value is: %lf\n", NewSimTime);
+						// Only sync time if needed (not within tolerance)
+						double timeDelta = abs(NewSimTime-SimTime);
+						if( timeDelta > TIME_SYNC_TOLERANCE)
+						{
+							printf("KC Test: Time Delta is %lf seconds, SYNCH...\n",timeDelta);
+							AbsTime0 = NewSimTime - SimTime; // AbsTime0 is epoch of sim start relative to the J2000 epoch
+							// Note that 946684800 is the difference (in seconds) between the J2000 epoch (1Jan2000) and the Unix epoch (1Jan1970)	
+							// THe difference between UNIX and GPS (6Jan1980)epochs is 315964800 
+						}
+						else
+						{
+							printf("KC Test: Time Delta is %lf seconds, not synching...\n",timeDelta);
+						}
 					break;
 					default:
 						printf("UNRECOGNIZED COMMAND %d\n", CmdId);
