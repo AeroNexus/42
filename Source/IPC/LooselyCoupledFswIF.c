@@ -447,6 +447,8 @@ int ConstructTimeMessage(float simTimeRatio, char* Msg) // Construct the message
 	LineLen = strlen(line);
 	memcpy(&Msg[MsgLen],line,LineLen);
 	MsgLen += LineLen;
+			
+	return MsgLen;
 }
 
 /**********************************************************************/
