@@ -237,9 +237,13 @@ void FieldRealTimeCommands(void) // UDP server handling multiple clients sending
 						if( timeDelta > TIME_SYNC_TOLERANCE)
 						{
 							printf("KC Test: Time Delta is %lf seconds, SYNCH...\n",timeDelta);
-							AbsTime0 = NewSimTime - SimTime; // AbsTime0 is epoch of sim start relative to the J2000 epoch
-							// Note that 946684800 is the difference (in seconds) between the J2000 epoch (1Jan2000) and the Unix epoch (1Jan1970)	
-							// THe difference between UNIX and GPS (6Jan1980)epochs is 315964800 
+							// AbsTime0 is epoch of sim start relative to the J2000 epoch
+							AbsTime0 = NewSimTime - SimTime - 946684800 - 43200; 
+							// Note that 946684800 is the difference (in seconds) between the J2000 epoch (1Jan2000) 
+							// and the Unix epoch (1Jan1970)	
+							// For some reason, this delta value results in an answer off by exactly 12 hours,
+							// So the 43200 is a factor to compensate - Action to work this disccrepency later...
+							// FWIW - The difference between UNIX and GPS (6Jan1980)epochs is 315964800 
 						}
 						else
 						{
