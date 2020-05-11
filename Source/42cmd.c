@@ -36,6 +36,15 @@ long SimCmdInterpreter(char CmdLine[512],double *CmdTime)
       char DvFrame;
       double Vec[3], DVN[3];
       struct OrbitType *O;
+      long Year,doy,Month,Day,Hour,Minute;
+      double Second;
+	  long RequestTimeRefresh = 0;
+	  
+      if (sscanf(CmdLine,"%lf TIME %ld-%ld-%ld:%ld:%lf\n",
+            CmdTime,&Year,&doy,&Hour,&Minute,&Second) == 6)  {				
+            RequestTimeRefresh = 1;
+			NewCmdProcessed = TRUE;
+			}
 
       if (sscanf(CmdLine,"%lf SC[%ld].RotDOF %s",
          CmdTime,&Isc,response) == 3) {
@@ -86,6 +95,13 @@ long SimCmdInterpreter(char CmdLine[512],double *CmdTime)
                 &O->tp,&O->SLR,&O->alpha,&O->rmin,
                 &O->MeanMotion,&O->Period);
       }
+	  
+	  
+      if (RequestTimeRefresh) {
+         /* Update AC->Time */
+         DOY2MD(Year,doy,&Month,&Day);
+         AbsTime0 = DateToAbsTime(Year,Month,Day,Hour,Minute,Second);
+	  }
 
       return(NewCmdProcessed);
 }
