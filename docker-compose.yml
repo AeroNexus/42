@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    image: proget.orbitlogic.com:81/ol-docker/aps/42:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DISPLAY=${DISPLAY}
+      - LIBGL_ALWAYS_INDIRECT=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: host
