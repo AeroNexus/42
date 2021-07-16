@@ -43,6 +43,12 @@ RUN make
 # Copy built 42 artifacts to base container
 FROM base
 
+# Install select tools we want in the final image
+RUN apt update && apt-get install -y \
+    net-tools \
+    tcpdump \
+&& rm -rf /var/lib/apt/lists/*
+
 ARG INSTALL="/42"
 RUN mkdir -p $INSTALL
 COPY --from=build /42 $INSTALL
