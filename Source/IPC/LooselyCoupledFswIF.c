@@ -43,7 +43,7 @@ int ConstructStateMessage_verbose(int Isc, char* Msg);
 int ConstructStateMessage_orig(int Isc, char* Msg);
 
 // Constants used in local code execution
-#define MAX_SC 20
+#define MAX_SC 100
 
 const int BUF_SIZE = 16384;
 const int CMD_SIZE = 256;
@@ -316,9 +316,15 @@ void SendSimStatesToUdpClients(void) // UDP clients sending simulation state str
 		
 		// Create the sockets
 		printf("SendSimStatesToUdpClients ->\n");
-		printf("... Setting up for %d S/C.\n",nSC);
+		printf("... Setting up for %d S/C.\n", nSC);
+		
+		if(MAX_SC < nSC)
+		{
+			printf("!WARNING! Socket space is only defined for %d S/C but %d detected! This may cause undefined behavior\n", MAX_SC, nSC);
+		}
+		
 		ts_s =  socket(AF_INET, SOCK_DGRAM, 0);
-		printf("Initializing socket %d for 42 time distribution\n", ts_s);	
+		printf("Initializing socket %d for 42 time distribution\n", ts_s);
 		
 		for(int iSC=0;iSC<nSC;iSC++)
 		{
@@ -361,7 +367,6 @@ void SendSimStatesToUdpClients(void) // UDP clients sending simulation state str
 			lastReportedTime = GpsTime;
 			last_time = cur_time;
 		}
-		
 		
 		for(int iSC=0;iSC<nSC;iSC++)
 		{		
