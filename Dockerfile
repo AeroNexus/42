@@ -40,6 +40,7 @@ COPY Makefile $INSTALL
 WORKDIR $INSTALL
 RUN make
 
+#=====================================================
 # Copy built 42 artifacts to base container
 FROM base
 
@@ -88,11 +89,23 @@ COPY --from=build [ \
     "${LIB_INSTALL}" \
 ]
 
-# Environment and execution
+# Docker entrypoint script and hooks
 COPY docker-entrypoint.sh /
+RUN mkdir -p /docker-entrypoint.d
+
+COPY docker-entrypoint.d /
 RUN chmod 755 /docker-entrypoint.sh
+
+# Default scenarios location
+RUN mkdir -p /42/scenarios
+RUN chmod -R 666 /42/scenarios
+ENV FORTYTWO_SCENARIO=scenarios/default
+# Note that the scenarios directory must be relative to the 42 root!
+
+# Environment setup
 ENV LD_LIBRARY_PATH="${INSTALL}/lib:${LD_LIBRARY_PATH}"
-ENV FORTYTWO_SCENARIO=""
+ENV LIBGL_ALWAYS_INDIRECT=0
+
 WORKDIR /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
