@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  fortytwo:
+    container_name: fortytwo
+    image: ${REGISTRY_URL}/42:latest
+    volumes:
+      - ./examples/config:/config
+      - ./examples/scenario:/scenarios/example
+    environment:
+      - FORTYTWO_GRPC_CONFIG=/examples/FortyTwoExample.json  # Start the cmd/tlm server with this config
+      - FORTYTWO_SCENARIO=scenarios/example    # specify the 42 scenario to use
+      - DISPLAY=${DISPLAY}          # host display for x-window support, e.g. 172.x.y.1:0
+      - LIBGL_ALWAYS_INDIRECT=1     # used for configuring x11 display forwarding
+      - GRAPHICS_FRONT_END=false    # set to false for headless mode (no UI, use for better performance)

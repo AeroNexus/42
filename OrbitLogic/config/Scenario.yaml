@@ -1,0 +1,83 @@
+vars:
+    RootDir: '/scenario_generator'
+    ScenarioDest: /42/scenarios/default
+
+configType: FORTY_TWO
+
+scenarioConfig:
+    scenarioName                    : Scenario
+    scenarioDuration                :
+        # Scenario Duration acceptable forms: startTime/stopTime, startTime/seconds, or seconds/delaySeconds
+        startTime                   : 2021-02-01T00:00:00
+        stopTime                    : 2021-02-01T04:00:00
+    stepTimeSeconds                 : 1.0
+    fileOutputIntervalSeconds       : 60.0
+    graphicsFrontEnd                : false           # FIXME: not working!
+    timeOffsetSecs                  : 99.0
+    modelDateInterpolation          :
+        type                        : USER_DEFINED    # ENUM: [TWOSIGMA_KP, NOMINAL, USER_DEFINED]
+        fTenDotSeven                : 111.0
+        ap                          : 222.0
+    magField                        :
+        type                        : IGRF            # ENUM: [NONE, DIPOLE, IGRF]
+        degree                      : 4
+        order                       : 2
+    earthGravityModel               :
+        n                           : 1
+        m                           : 1
+    marsGravityModel                :
+        n                           : 3
+        m                           : 3
+    lunaGravityModel                :
+        n                           : 5
+        m                           : 5
+    aerodynamicForcesAndTorques     :
+        aero                        : false
+        shadow                      : false
+    gravityGradientTorques          : false
+    solarPressureForcesAndTorques   :
+        aero                        : false
+        shadow                      : false
+    gravityPerturbationForces       : false
+    passiveJointForcesAndTorques    : false
+    thrusterPlumeForcesAndTorques   : false
+    rwaImbalanceForcesAndTorques    : false
+    contactForcesAndTorques         : false
+    cfdSloshForcesAndTorques        : false
+    outputEnvironmentalTorquesFiles : false
+    celestialBodiesOfInterest       :
+        ephemOption                 : MEAN            # ENUM: [MEAN, DE430]
+        bodies                      :                 # ENUM LIST: [MERCURY, VENUS, EARTH, MARS, JUPITER, SATURN, URANUS, NEPTUNE, PLUTO, ASTEROIDS_AND_COMETS]
+            - EARTH
+    lagrangePointSystemsOfInterest  :                 # ENUM LIST: [EARTH_MOON, SUN_EARTH, SUN_JUPITER]
+        - EARTH_MOON
+    artifactLayoutDirs              :
+        scenario                    :
+            base                    : ${/vars/ScenarioDest}
+
+assets:
+    # Assets may be provided as an Asset File or list of Spacecrafts. A List provided spacecraft can override
+    # a file asset if named identically
+    file               :
+        path           : '/config/coe.csv'
+        orbitCenter    : EARTH
+        orbitProp      : FIXED
+        attitude       :
+            a          : 0.0
+            b          : 0.0
+            c          : 0.0
+            d          : 1.0
+        rampCoastGlide :
+            wc         : 0.05
+            amax       : 0.1
+            vmax       : 0.087
+
+groundTargets:
+    - name    : CA_1
+      lat     : -76.70
+      lon     :   4.29
+      world   : EARTH
+    - name    : CA_2
+      lat     : -77.24
+      lon     :   6.06
+      world   : EARTH

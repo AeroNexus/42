@@ -1,0 +1,15 @@
+FROM cogit-art.orbitlogic.com:5050/aps/store/42 AS base
+
+RUN mkdir -p /42/scenarios/edge
+
+COPY program_data/edge/scenario/ /42/scenarios/edge/
+COPY program_data/edge/FortyTwoEdge.json /
+
+# Note that the scenario directory is specified relative to the 42 installation
+ENV FORTYTWO_SCENARIO=scenarios/edge
+ENV FORTYTWO_GRPC_CONFIG=/FortyTwoEdge.json
+ENV GRAPHICS_FRONT_END=false
+
+WORKDIR /
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
