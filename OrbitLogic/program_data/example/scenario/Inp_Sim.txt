@@ -1,0 +1,140 @@
+<<<<<<<<<<<<<<<<<  42: The Mostly Harmless Simulator  >>>>>>>>>>>>>>>>>
+************************** Simulation Control **************************
+REAL                            !  Time Mode (FAST, REAL, or EXTERNAL)
+20000.0   2.0                    !  Sim Duration, Step Size [sec]
+10.0                             !  File Output Interval [sec]
+FALSE                            !  Graphics Front End?
+Inp_Cmd.txt                     !  Command Script File Name
+**************************  Reference Orbits  **************************
+8                               !  Number of Reference Orbits
+TRUE   Orb_100km_0.txt              !  Input file name for Orb 0
+TRUE   Orb_100km_1.txt              !  Input file name for Orb 1
+TRUE   Orb_100km_2.txt              !  Input file name for Orb 2
+TRUE   Orb_100km_3.txt              !  Input file name for Orb 3
+TRUE   Orb_100km_4.txt              !  Input file name for Orb 4
+TRUE   Orb_100km_5.txt              !  Input file name for Orb 5
+TRUE   Orb_100km_6.txt              !  Input file name for Orb 6
+TRUE   Orb_100km_7.txt              !  Input file name for Orb 7
+*****************************  Spacecraft  *****************************
+8                            !  Number of Spacecraft
+TRUE  0 SC_Luna_0.txt             !  Existence, RefOrb, Input file for SC 0
+TRUE  1 SC_Luna_1.txt             !  Existence, RefOrb, Input file for SC 1
+TRUE  2 SC_Luna_2.txt             !  Existence, RefOrb, Input file for SC 2
+TRUE  3 SC_Luna_3.txt             !  Existence, RefOrb, Input file for SC 3
+TRUE  4 SC_Luna_4.txt             !  Existence, RefOrb, Input file for SC 4
+TRUE  5 SC_Luna_5.txt             !  Existence, RefOrb, Input file for SC 5
+TRUE  6 SC_Luna_6.txt             !  Existence, RefOrb, Input file for SC 6
+TRUE  7 SC_Luna_7.txt             !  Existence, RefOrb, Input file for SC 7
+***************************** Environment  *****************************
+11 15 2020                      !  Date (Month, Day, Year)
+18 00 00.00                     !  Greenwich Mean Time (Hr,Min,Sec)
+0.0                             !  Time Offset (sec)
+USER_DEFINED                    !  Model Date Interpolation for Solar Flux and AP values?(TWOSIGMA_KP, NOMINAL or USER_DEFINED)
+230.0                           !  If USER_DEFINED, enter desired F10.7 value
+100.0                           !  If USER_DEFINED, enter desired AP value
+IGRF                            !  Magfield (NONE,DIPOLE,IGRF)
+8   8                           !  IGRF Degree and Order (<=10)
+8   8                           !  Earth Gravity Model N and M (<=18)
+2   0                           !  Mars Gravity Model N and M (<=18)
+2   0                           !  Luna Gravity Model N and M (<=18)
+FALSE   FALSE                   !  Aerodynamic Forces & Torques (Shadows)
+FALSE                           !  Gravity Gradient Torques
+FALSE   FALSE                   !  Solar Pressure Forces & Torques (Shadows)
+FALSE                           !  Gravity Perturbation Forces
+FALSE                           !  Passive Joint Forces & Torques
+FALSE                           !  Thruster Plume Forces & Torques
+FALSE                           !  RWA Imbalance Forces and Torques
+FALSE                           !  Contact Forces and Torques
+FALSE                           !  CFD Slosh Forces and Torques
+FALSE                           !  Output Environmental Torques to Files
+********************* Celestial Bodies of Interest *********************
+MEAN                          ! Ephem Option (VSOP87 or DE430)
+FALSE                           !  Mercury
+FALSE                           !  Venus
+TRUE                           !  Earth and Luna
+FALSE                            !  Mars and its moons
+FALSE                           !  Jupiter and its moons
+FALSE                           !  Saturn and its moons
+FALSE                           !  Uranus and its moons
+FALSE                           !  Neptune and its moons
+FALSE                           !  Pluto and its moons
+FALSE                           !  Asteroids and Comets
+***************** Lagrange Point Systems of Interest ******************
+FALSE                           !  Earth-Moon
+FALSE                           !  Sun-Earth
+FALSE                           !  Sun-Jupiter
+************************* Ground Stations ***************************
+73                                           ! Number of Ground Stations
+TRUE  LUNA  10.0 -80.0  "CA_1"      ! Exists, World, Lng, Lat, Label
+TRUE  LUNA  20.0 -80.0  "CA_2"     
+TRUE  LUNA  30.0 -80.0  "CA_3"     
+TRUE  LUNA  40.0 -80.0  "CA_4"    
+TRUE  LUNA  50.0 -80.0  "CA_5"   
+TRUE  LUNA  60.0 -80.0  "CA_6"   
+TRUE  LUNA  70.0 -80.0  "CA_7"   
+TRUE  LUNA  80.0 -80.0  "CA_8"   
+TRUE  LUNA  90.0 -80.0  "CA_9"   
+TRUE  LUNA  100.0 -80.0  "CA_10"   
+TRUE  LUNA  110.0 -80.0  "CA_11"   
+TRUE  LUNA  120.0 -80.0  "CA_12"   
+TRUE  LUNA  130.0 -80.0  "CA_13"   
+TRUE  LUNA  140.0 -80.0  "CA_14"   
+TRUE  LUNA  150.0 -80.0  "CA_15"   
+TRUE  LUNA  160.0 -80.0  "CA_16"   
+TRUE  LUNA  170.0 -80.0  "CA_17"   
+TRUE  LUNA  180.0 -80.0  "CA_18"   
+TRUE  LUNA  -170.0 -80.0  "CA_19"   
+TRUE  LUNA  -160.0 -80.0  "CA_20"   
+TRUE  LUNA  -150.0 -80.0  "CA_21"   
+TRUE  LUNA  -140.0 -80.0  "CA_22"   
+TRUE  LUNA  -130.0 -80.0  "CA_23"   
+TRUE  LUNA  -120.0 -80.0  "CA_24"   
+TRUE  LUNA  -110.0 -80.0  "CA_25"   
+TRUE  LUNA  -100.0 -80.0  "CA_26"   
+TRUE  LUNA  -90.0 -80.0  "CA_27"   
+TRUE  LUNA  -80.0 -80.0  "CA_28"    
+TRUE  LUNA  -70.0 -80.0  "CA_29"  
+TRUE  LUNA  -60.0 -80.0  "CA_30"  
+TRUE  LUNA  -50.0 -80.0  "CA_31"  
+TRUE  LUNA  -40.0 -80.0  "CA_32"  
+TRUE  LUNA  -30.0 -80.0  "CA_33"  
+TRUE  LUNA  -20.0 -80.0  "CA_34"  
+TRUE  LUNA  -10.0 -80.0  "CA_35" 
+TRUE  LUNA  0.0 -80.0  "CA_36" 
+TRUE  LUNA  10.0 -85.0  "NA_1"    
+TRUE  LUNA  20.0 -85.0  "NA_2"     
+TRUE  LUNA  30.0 -85.0  "NA_3"     
+TRUE  LUNA  40.0 -85.0  "NA_4"    
+TRUE  LUNA  50.0 -85.0  "NA_5"   
+TRUE  LUNA  60.0 -85.0  "NA_6"   
+TRUE  LUNA  70.0 -85.0  "NA_7"   
+TRUE  LUNA  80.0 -85.0  "NA_8"   
+TRUE  LUNA  90.0 -85.0  "NA_9"   
+TRUE  LUNA  100.0 -85.0  "NA_10"   
+TRUE  LUNA  110.0 -85.0  "NA_11"   
+TRUE  LUNA  120.0 -85.0  "NA_12"   
+TRUE  LUNA  130.0 -85.0  "NA_13"   
+TRUE  LUNA  140.0 -85.0  "NA_14"   
+TRUE  LUNA  150.0 -85.0  "NA_15"   
+TRUE  LUNA  160.0 -85.0  "NA_16"   
+TRUE  LUNA  170.0 -85.0  "NA_17"   
+TRUE  LUNA  180.0 -85.0  "NA_18"   
+TRUE  LUNA  -170.0 -85.0  "NA_19"   
+TRUE  LUNA  -160.0 -85.0  "NA_20"   
+TRUE  LUNA  -150.0 -85.0  "NA_21"   
+TRUE  LUNA  -140.0 -85.0  "NA_22"   
+TRUE  LUNA  -130.0 -85.0  "NA_23"   
+TRUE  LUNA  -120.0 -85.0  "NA_24"   
+TRUE  LUNA  -110.0 -85.0  "NA_25"   
+TRUE  LUNA  -100.0 -85.0  "NA_26"   
+TRUE  LUNA  -90.0 -85.0  "NA_27"   
+TRUE  LUNA  -85.0 -85.0  "NA_28"    
+TRUE  LUNA  -70.0 -85.0  "NA_29"  
+TRUE  LUNA  -60.0 -85.0  "NA_30"  
+TRUE  LUNA  -50.0 -85.0  "NA_31"  
+TRUE  LUNA  -40.0 -85.0  "NA_32"  
+TRUE  LUNA  -30.0 -85.0  "NA_33"  
+TRUE  LUNA  -20.0 -85.0  "NA_34"  
+TRUE  LUNA  -10.0 -85.0  "NA_35" 
+TRUE  LUNA  0.0 -85.0  "NA_36" 
+TRUE  LUNA  0.0 -90.0  "SouthPole" 
