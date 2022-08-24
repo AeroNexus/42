@@ -287,6 +287,7 @@ long SimStep(void)
          ZeroFrcTrq();
          for(Isc=0;Isc<Nsc;Isc++) {
             S = &SC[Isc];
+
             if (S->Exists) {
                Environment(S);    /* Magnetic Field, Atmospheric Density */
                Perturbations(S);  /* Environmental Forces and Torques */
