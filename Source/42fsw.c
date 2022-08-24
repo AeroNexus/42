@@ -428,7 +428,7 @@ long FswCmdInterpreter(char CmdLine[512],double *CmdTime)
       else if (sscanf(CmdLine,"%lf Set SC[%ld] RampCoastGlide wc = %lf Hz, amax = %lf, vmax = %lf",
          CmdTime,&Isc,&wc,&amax,&vmax) == 5) {
          NewCmdProcessed = TRUE;
-         SC[Isc].AC.PrototypeCtrl.wc = wc*TwoPi;
+         SC[Isc].AC.PrototypeCtrl.wc = wc;
          SC[Isc].AC.PrototypeCtrl.amax = amax;
          SC[Isc].AC.PrototypeCtrl.vmax = vmax;
       }
@@ -960,7 +960,7 @@ void InitAC(struct SCType *S)
       AC->CfsCtrl.Init = 1;
       AC->ThrSteerCtrl.Init = 1;
       
-      AC->PrototypeCtrl.wc = 0.05*TwoPi;
+      AC->PrototypeCtrl.wc = 0.05;
       AC->PrototypeCtrl.amax = 0.01;
       AC->PrototypeCtrl.vmax = 0.5*D2R;
       
