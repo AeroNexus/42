@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 # By default, scenarios are stored under /42/scenarios
 # When invoked below, 42 takes as argument a scenario directory relative to its root, e.g.
 # ./42 my_scenarios
@@ -57,6 +56,35 @@ hr | tee -a ${LOGFILE}
 printf "Starting 42 sim...\n" | tee -a ${LOGFILE}
 hr | tee -a ${LOGFILE}
 
+# IMPORTANT: 42 must be started from within the installed directory
+# as it relies on relative paths from this location.
+cd /42
+
 # Execute
-cd /42 && ./42 $FORTYTWO_SCENARIO | tee -a ${LOGFILE}
-exec "$@"
+# Quick/dirty restart loop for endless simulation
+# Note that this does NOT terminate the GRPC service, so connections to downstream
+# telemetry consumers are not closed, and the GRPC provider will continue to stream
+# 42's UDP data once it starts up again.
+EXITCODE=0
+while true; do
+
+    # Start/run the application; capture exit code on completion
+    ./42 $FORTYTWO_SCENARIO | tee -a ${LOGFILE}
+    EXITCODE=$?
+
+    if [[ "$EXITCODE" == "0" ]]; then
+        if [[ "$FORTYTWO_AUTO_RESTART" != "true" ]]; then
+            echo "42 Scenario has ended (code = $EXITCODE). Exiting."
+            break
+        else
+            echo "42 Scenario has ended nominally. Restarting..."
+        fi
+    else
+        echo "42 exited in error! (code = $EXITCODE). Exiting."
+        break
+    fi
+    sleep 2
+
+done
+
+exit $EXITCODE

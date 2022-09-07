@@ -157,6 +157,7 @@ RUN chmod -R 755 /scenario_generator/bin
 # Default environment vars
 ENV FORTYTWO_SCENARIO=scenarios/default
 ENV FORTYTWO_GRPC_CONFIG=/config/server.json
+ENV FORTYTWO_AUTO_RESTART=false
 ENV SCENARIO_GENERATOR_DIR=/scenario_generator
 ENV SCENARIO_GENERATOR_CONFIG=""
 ENV SCENARIO_GENERATOR_COE_SELECTOR=""
