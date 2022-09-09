@@ -1,0 +1,1 @@
+Any files placed here will automatically get installed to /config.

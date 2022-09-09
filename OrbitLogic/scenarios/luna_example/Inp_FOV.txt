@@ -1,0 +1,84 @@
+/*                 Note: FOV Boresight is +Z Axis                 */
+************************* Fields of View ***************************
+8                                  !  Number of FOVs
+--------------------------------------------------------------------
+"EO Imager"                            !  Label
+4   100000.0                            !  Number of Sides, Length [m]
+8.0  4.0                           !  X Width, Y Height [deg]
+0.0 0.5 0.5 0.25                    !  Color RGB+Alpha
+SOLID                              !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  TRUE                         !  Draw Near Field, Draw Far Field
+0  0                               !  SC, Body 
+0.0  0.0  1.0                      !  Position in Body [m]
+0.0  0.0  0.0  321                 !  Euler Angles [deg], Sequence
+--------------------------------------------------------------------
+"EO Imager"                            !  Label
+4   100000.0                            !  Number of Sides, Length [m]
+8.0  4.0                           !  X Width, Y Height [deg]
+0.0 0.5 0.5 0.25                    !  Color RGB+Alpha
+SOLID                              !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  TRUE                         !  Draw Near Field, Draw Far Field
+1  0                               !  SC, Body 
+0.0  0.0  1.0                      !  Position in Body [m]
+0.0  0.0  0.0  321                 !  Euler Angles [deg], Sequence
+--------------------------------------------------------------------
+"EO Imager"                            !  Label
+4   100000.0                            !  Number of Sides, Length [m]
+8.0  4.0                           !  X Width, Y Height [deg]
+0.0 0.5 0.5 0.25                    !  Color RGB+Alpha
+SOLID                              !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  TRUE                         !  Draw Near Field, Draw Far Field
+2  0                               !  SC, Body 
+0.0  0.0  1.0                      !  Position in Body [m]
+0.0  0.0  0.0  321                 !  Euler Angles [deg], Sequence
+--------------------------------------------------------------------
+"EO Imager"                            !  Label
+4   100000.0                            !  Number of Sides, Length [m]
+8.0  4.0                           !  X Width, Y Height [deg]
+0.0 0.5 0.5 0.25                    !  Color RGB+Alpha
+SOLID                              !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  TRUE                         !  Draw Near Field, Draw Far Field
+3  0                               !  SC, Body 
+0.0  0.0  1.0                      !  Position in Body [m]
+0.0  0.0  0.0  321                 !  Euler Angles [deg], Sequence
+--------------------------------------------------------------------
+"EO Imager"                            !  Label
+4   100000.0                            !  Number of Sides, Length [m]
+8.0  4.0                           !  X Width, Y Height [deg]
+0.0 0.5 0.5 0.25                    !  Color RGB+Alpha
+SOLID                              !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  TRUE                         !  Draw Near Field, Draw Far Field
+4  0                               !  SC, Body 
+0.0  0.0  1.0                      !  Position in Body [m]
+0.0  0.0  0.0  321                 !  Euler Angles [deg], Sequence
+--------------------------------------------------------------------
+"EO Imager"                            !  Label
+4   100000.0                            !  Number of Sides, Length [m]
+8.0  4.0                           !  X Width, Y Height [deg]
+0.0 0.5 0.5 0.25                    !  Color RGB+Alpha
+SOLID                              !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  TRUE                         !  Draw Near Field, Draw Far Field
+5  0                               !  SC, Body 
+0.0  0.0  1.0                      !  Position in Body [m]
+0.0  0.0  0.0  321                 !  Euler Angles [deg], Sequence
+--------------------------------------------------------------------
+"EO Imager"                            !  Label
+4   100000.0                            !  Number of Sides, Length [m]
+8.0  4.0                           !  X Width, Y Height [deg]
+0.0 0.5 0.5 0.25                    !  Color RGB+Alpha
+SOLID                              !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  TRUE                         !  Draw Near Field, Draw Far Field
+6  0                               !  SC, Body 
+0.0  0.0  1.0                      !  Position in Body [m]
+0.0  0.0  0.0  321                 !  Euler Angles [deg], Sequence
+--------------------------------------------------------------------
+"EO Imager"                            !  Label
+4   100000.0                            !  Number of Sides, Length [m]
+8.0  4.0                           !  X Width, Y Height [deg]
+0.0 0.5 0.5 0.25                    !  Color RGB+Alpha
+SOLID                              !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  TRUE                         !  Draw Near Field, Draw Far Field
+7  0                               !  SC, Body 
+0.0  0.0  1.0                      !  Position in Body [m]
+0.0  0.0  0.0  321                 !  Euler Angles [deg], Sequence
+--------------------------------------------------------------------

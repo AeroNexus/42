@@ -1,0 +1,19 @@
+# Example program-specific deployment
+
+FROM cogit-art.orbitlogic.com:5050/aps/store/42 AS base
+
+ARG SCENARIO_NAME=luna_example
+
+RUN mkdir -p /42/scenarios/${SCENARIO_NAME}
+
+COPY scenarios/luna_example/ /42/scenarios/${SCENARIO_NAME}/
+COPY scenarios/LunaExample.json /
+
+# Note that the scenario directory is specified relative to the 42 installation
+ENV FORTYTWO_SCENARIO=scenarios/${SCENARIO_NAME}
+ENV FORTYTWO_GRPC_CONFIG=/LunaExample.json
+ENV GRAPHICS_FRONT_END=false
+
+WORKDIR /
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]

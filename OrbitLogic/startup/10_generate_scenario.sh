@@ -42,9 +42,9 @@ else
     log "No SCENARIO_GENERATOR_COE_INPUT file provided."
 fi
 
-# Find the newest scenario generator jarfile
+# Find the newest scenario generator jarfile e.g. JastroScenarioGenerator-6.1.4.jar
 cd ${SCENARIO_GENERATOR_DIR}/bin
-JARFILE=$(ls JastroScenarioGenerator*.jar | head -n 1)
+JARFILE=$(ls JastroScenarioGenerator*.jar | tail -n 1)
 
 log "Generating scenario with $JARFILE"
 log "SCENARIO_GENERATOR_CONFIG = $SCENARIO_GENERATOR_CONFIG"

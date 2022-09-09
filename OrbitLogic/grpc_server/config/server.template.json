@@ -1,0 +1,14 @@
+{
+  "address" : "0.0.0.0:5051",
+  "fortyTwoSim" :
+  {
+    "timePort" : 8888,
+    "timeBufferSizeBytes" : 1024,
+    "cmdPort" : 6789,
+    "cmdFmtPort" : 5678,
+    "tlmPortBase" : 7777,
+    "satNames" : [
+      "$SCENARIO_GENERATOR_COE_SELECTOR"
+    ]
+  }
+}

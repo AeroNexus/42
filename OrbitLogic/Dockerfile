@@ -1,5 +1,6 @@
-#FROM ubuntu:18.04 as base
-FROM harisekhon/ubuntu-java:8 as base
+# Use the java base container to support scenario generator
+#FROM harisekhon/ubuntu-java:8 as base
+FROM eclipse-temurin:8 as base
 
 # Build in a temporary build container
 FROM base as build
@@ -78,42 +79,30 @@ ARG INSTALL="/42"
 RUN mkdir -p $INSTALL
 COPY --from=build /42 $INSTALL
 
-ARG LIB_INSTALL="/usr/lib/x86_64-linux-gnu"
-RUN mkdir -p ${LIB_INSTALL}
+COPY --from=build /lib/ /lib/
+COPY --from=build /usr/lib/ /usr/lib/
 
-# Specific dependencies (can limit image size, but YMMV)
-#COPY --from=build [ \
-#    "/usr/lib/x86_64-linux-gnu/libGL.so.1", \
-#    "/usr/lib/x86_64-linux-gnu/libGLdispatch.so.0", \
-#    "/usr/lib/x86_64-linux-gnu/libGLU.so.1", \
-#    "/usr/lib/x86_64-linux-gnu/libGLX.so.0", \
-#    "/usr/lib/x86_64-linux-gnu/libglut.so.3", \
-#    "/usr/lib/x86_64-linux-gnu/libXi.so.6", \
-#    "/usr/lib/x86_64-linux-gnu/libX11.so.6", \
-#    "/usr/lib/x86_64-linux-gnu/libXxf86vm.so.1", \
-#    "/usr/lib/x86_64-linux-gnu/libxcb.so.1", \
-#    "/usr/lib/x86_64-linux-gnu/libXau.so.6", \
-#    "/usr/lib/x86_64-linux-gnu/libXdmcp.so.6", \
-#    "/usr/lib/x86_64-linux-gnu/libXext.so.6", \
-#    "${LIB_INSTALL}/" \
-#]
+#ARG LIB_INSTALL="/usr/lib/x86_64-linux-gnu"
+#RUN mkdir -p ${LIB_INSTALL}
 
 # Copy in dependencies under /usr/lib from build image
-COPY --from=build [ \
-    "/usr/lib/x86_64-linux-gnu", \
-    "${LIB_INSTALL}" \
-]
+#COPY --from=build [ \
+#    "/usr/lib/x86_64-linux-gnu", \
+#    "${LIB_INSTALL}" \
+#]
 
 # Copy in dependencies under /lib from build image
-ARG LIB_INSTALL="/lib/x86_64-linux-gnu"
-RUN mkdir -p ${LIB_INSTALL}
+#ARG LIB_INSTALL="/lib/x86_64-linux-gnu"
+#RUN mkdir -p ${LIB_INSTALL}
 
-COPY --from=build [ \
-    "/lib/x86_64-linux-gnu", \
-    "${LIB_INSTALL}" \
-]
+#COPY --from=build [ \
+#    "/lib/x86_64-linux-gnu", \
+#    "${LIB_INSTALL}" \
+#]
 
+#=====================================================
 # Docker entrypoint script and hooks
+
 RUN mkdir -p /docker-entrypoint.d
 RUN chmod 777 /docker-entrypoint.d
 COPY OrbitLogic/docker-entrypoint.sh /
@@ -125,45 +114,74 @@ COPY OrbitLogic/startup/ /startup/
 RUN chmod 755 /startup/*.sh
 RUN chmod 755 /startup/*.pl
 
+# Set up scenario and log locations
+RUN mkdir -p /42/scenarios && chmod -R 666 /42/scenarios
+RUN mkdir -p /42/logs && chmod -R 777 /42/logs
+
+# Install base scenario artifacts for reference
+RUN mkdir -p /42/scenarios/base
+COPY OrbitLogic/scenarios/base/ /42/scenarios/base/
+
+#=====================================================
 # Add gRPC server utilities
+
 RUN mkdir -p /grpc_server
 COPY OrbitLogic/grpc_server/ /grpc_server/
 RUN chmod -R 755 /grpc_server/bin
 
-# Set up scenario and log locations
-RUN mkdir -p /42/scenarios && chmod -R 666 /42/scenarios
-RUN mkdir -p /42/logs && chmod -R 777 /42/logs
-RUN mkdir -p /scenarios/base
-
+#=====================================================
 # Default configuration files and application inputs
+
+# Create placeholder config location. Files placed in /entrypoint-config.d
+# are automatically installed here, so the directory needs to exist.
 RUN mkdir -p /config
-COPY OrbitLogic/config/ /config/
+RUN chmod -R 755 /config
+
+# Install default grpc_sever config files
+COPY OrbitLogic/grpc_server/config/*.json /config
 
 # Default configuration files and application inputs
 RUN mkdir -p /entrypoint-config.d
 COPY OrbitLogic/entrypoint-config.d/ /entrypoint-config.d/
 RUN chmod -R 644 /entrypoint-config.d
 
+#=====================================================
 # Create a default/fallback scenario
-# Note that the scenarios directory must be relative to the 42 root!
-RUN mkdir -p /42/scenarios/default
-COPY OrbitLogic/default_scenario/ /42/scenarios/default/
 
+RUN mkdir -p /42/scenarios/default
+COPY OrbitLogic/scenarios/luna_example/ /42/scenarios/default/
+
+#=====================================================
 # Scenario Generator
+
 RUN mkdir -p /scenario_generator
 COPY OrbitLogic/scenario_generator/ /scenario_generator/
 RUN chmod -R 755 /scenario_generator/bin
 
-# Default environment vars
-ENV FORTYTWO_SCENARIO=scenarios/default
-ENV FORTYTWO_GRPC_CONFIG=/config/server.json
-ENV FORTYTWO_AUTO_RESTART=false
-ENV SCENARIO_GENERATOR_DIR=/scenario_generator
-ENV SCENARIO_GENERATOR_CONFIG=""
-ENV SCENARIO_GENERATOR_COE_SELECTOR=""
-ENV SCENARIO_GENERATOR_COE_INPUT=/config/coe_inputs.csv
-
+#=====================================================
 # Environment setup
+
+# Default scenario. Note that this is intentionally relative to the 42 root!
+ENV FORTYTWO_SCENARIO=scenarios/default
+
+# Default to single-run (do not recycle scenario on completion)
+ENV FORTYTWO_AUTO_RESTART=false
+
+# Provide a default gRPC server configuration path
+ENV FORTYTWO_GRPC_CONFIG=/config/server.json
+
+# Default scenario generator inputs. These are usually overridden
+ENV SCENARIO_GENERATOR_DIR=/scenario_generator
+ENV SCENARIO_GENERATOR_COE_INPUT=/scenario_generator/config/coe_inputs.csv
+
+# Default: no scenario generation (blank string)
+# When the user provides a file path here, generation is enabled
+ENV SCENARIO_GENERATOR_CONFIG=""
+
+# The following is used to downselect assets from the coe_inputs. By default
+# it is blank (use all assets in the coe_inputs file)
+ENV SCENARIO_GENERATOR_COE_SELECTOR=""
+
 ENV LD_LIBRARY_PATH="${INSTALL}/lib:${LD_LIBRARY_PATH}"
 ENV LIBGL_ALWAYS_INDIRECT=0
 ENV GRAPHICS_FRONT_END=false
