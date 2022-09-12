@@ -79,22 +79,21 @@ ARG INSTALL="/42"
 RUN mkdir -p $INSTALL
 COPY --from=build /42 $INSTALL
 
+# FIXME: this is a bit overkill; 42 requires the dependencies under </usr>/lib/{arch}-linux-gnu
+# The following copies everythign to be safe, but this could be reduced for image size.
 COPY --from=build /lib/ /lib/
 COPY --from=build /usr/lib/ /usr/lib/
 
 #ARG LIB_INSTALL="/usr/lib/x86_64-linux-gnu"
 #RUN mkdir -p ${LIB_INSTALL}
-
 # Copy in dependencies under /usr/lib from build image
 #COPY --from=build [ \
 #    "/usr/lib/x86_64-linux-gnu", \
 #    "${LIB_INSTALL}" \
 #]
-
 # Copy in dependencies under /lib from build image
 #ARG LIB_INSTALL="/lib/x86_64-linux-gnu"
 #RUN mkdir -p ${LIB_INSTALL}
-
 #COPY --from=build [ \
 #    "/lib/x86_64-linux-gnu", \
 #    "${LIB_INSTALL}" \
