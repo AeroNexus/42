@@ -6,9 +6,14 @@ This folder contains extensions of the 42 simulator provided by Orbit Logic Inc.
 
 Copy the provided `.env.example` file to a `.env` file in the top level of the repository. Ensure that the URL for your private registry is correct.
 
-Use the `Makefile` to build the generic Docker image.
+Use the `Makefile` to build the generic Docker image *for local testing*.
 ```bash
 make docker-image
+```
+
+To push to the OL container registry, use the **multi-arch** build target:
+```bash
+make docker-multiplatform
 ```
 
 Simply run the docker image in a container to use the default scenario. In most cases, you will want to pass a variety of environment settings; see the [Example Compose](#example-compose-content) section below.
