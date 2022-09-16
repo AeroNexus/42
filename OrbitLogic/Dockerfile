@@ -126,7 +126,7 @@ COPY OrbitLogic/scenarios/base/ /42/scenarios/base/
 
 RUN mkdir -p /grpc_server
 COPY OrbitLogic/grpc_server/ /grpc_server/
-RUN chmod -R 755 /grpc_server/bin
+RUN chmod -R 755 /grpc_server/**/bin
 
 #=====================================================
 # Default configuration files and application inputs

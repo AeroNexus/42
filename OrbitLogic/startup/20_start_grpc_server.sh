@@ -22,10 +22,13 @@ fi
 
 # Execute 42 GRPC server
 
+ARCH=$(arch)
+
 log "Starting 42 gRPC command/telemetry server..."
 log "> Config: ${FORTYTWO_GRPC_CONFIG}"
+log "> Arch: ${ARCH}"
 
-/grpc_server/bin/FortyTwoGRPCServer -s -l trace -c $FORTYTWO_GRPC_CONFIG \
+/grpc_server/${ARCH}/bin/FortyTwoGRPCServer -s -l trace -c $FORTYTWO_GRPC_CONFIG \
     > /42/logs/grpc_server.log 2>&1 &
 
 log "> Finished!"
