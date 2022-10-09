@@ -1508,7 +1508,6 @@ void InitSpacecraft(struct SCType *S)
          printf("Info:  FswSampleTime was smaller than DTSIM.  It has been adjusted to be DTSIM.\n");
       }
       S->FswSampleCounter = S->FswMaxCounter;
-      S->InitAC = 1;
 
 /* .. Orbit Parameters */
       fscanf(infile,"%[^\n] %[\n]",junk,&newline);

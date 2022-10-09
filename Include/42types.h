@@ -445,7 +445,6 @@ struct SCType {
    double FswSampleTime;
    long FswMaxCounter;
    long FswSampleCounter;
-   long InitAC;
 
    long Nb;   /* Number of bodies */
    long Ng;   /* Number of joints, = Nb-1 */
