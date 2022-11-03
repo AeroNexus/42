@@ -73,6 +73,7 @@ FROM base
 RUN apt update && apt-get install -y \
     net-tools \
     tcpdump \
+    netcat \
 && rm -rf /var/lib/apt/lists/*
 
 ARG INSTALL="/42"
