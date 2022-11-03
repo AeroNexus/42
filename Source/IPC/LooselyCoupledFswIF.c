@@ -43,7 +43,7 @@ int ConstructStateMessage_verbose(int Isc, char* Msg);
 int ConstructStateMessage_orig(int Isc, char* Msg);
 
 // Constants used in local code execution
-#define MAX_SC 100
+#define MAX_SC 300
 
 const int BUF_SIZE = 16384;
 const int CMD_SIZE = 256;

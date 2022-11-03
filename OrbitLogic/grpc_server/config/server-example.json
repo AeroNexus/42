@@ -1,0 +1,21 @@
+{
+  "address" : "0.0.0.0:5051",
+  "fortyTwoSim" :
+  {
+    "timePort" : 8888,
+    "timeBufferSizeBytes" : 1024,
+    "cmdPort" : 6789,
+    "cmdFmtPort" : 5678,
+    "tlmPortBase" : 7777,
+    "satNames" : [
+      "DemoSat-01",
+      "DemoSat-02",
+      "DemoSat-03",
+      "DemoSat-04",
+      "DemoSat-05",
+      "DemoSat-06",
+      "DemoSat-07",
+      "DemoSat-08"
+    ]
+  }
+}
