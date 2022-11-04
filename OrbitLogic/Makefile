@@ -40,6 +40,13 @@ docker-image: ## Build the container images
 		-t $(IMG_TAG):latest \
 		-f Dockerfile $(ROOT)
 
+docker-image-local: ## Build the container images
+	$(eval IMG_TAG := $(URL)/$(APP_NAME))
+	docker build --no-cache --platform=linux/amd64 \
+		-t $(IMG_TAG):$(VERSION) \
+		-t $(IMG_TAG):latest \
+		-f Dockerfile $(ROOT)
+
 docker-multiplatform: ## Build the multiplatform container images
 	$(eval IMG_TAG := $(URL)/$(APP_NAME))
 	docker buildx build --push --platform=$(PLATFORMS) --progress=plain \
