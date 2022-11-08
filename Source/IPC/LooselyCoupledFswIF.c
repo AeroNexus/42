@@ -156,6 +156,7 @@ void FieldRealTimeCommands(void) // UDP server handling multiple clients sending
 		if(RtCmdSock>=0) 
 		{
 			memset(Msg,'\0',BUF_SIZE);
+			addrLen = sizeof(cliaddr);
 			nBytes = recvfrom(RtCmdSock, (char *)Msg, BUF_SIZE,  
 							MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
 							&addrLen); 
@@ -200,6 +201,7 @@ void FieldRealTimeCommands(void) // UDP server handling multiple clients sending
 		if(FmtRtCmdSock>=0) 
 		{
 			memset(Msg,'\0',BUF_SIZE);
+			addrLen = sizeof(cliaddr);
 			nBytes = recvfrom(FmtRtCmdSock, (char *)Msg, BUF_SIZE,  
 							MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
 							&addrLen); 
