@@ -279,6 +279,9 @@ void FieldRealTimeCommands(void) // UDP server handling multiple clients sending
 			
 		}
 	}
+
+	// Add flush for prints since otherwise these log messages can get caught up in the buffer and not printed
+	fflush(stdout);
 }
 
 /**********************************************************************/
