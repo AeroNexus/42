@@ -1,6 +1,6 @@
 # Orbit Logic 42 Configuration
 
-This folder contains extensions of the 42 simulator provided by Orbit Logic Inc.
+This folder contains extensions of the 42 simulator provided by Orbit Logic LLC
 
 ## Quick Start
 
