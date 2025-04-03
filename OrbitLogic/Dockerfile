@@ -7,8 +7,8 @@ FROM base as build
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-RUN apt update && apt-get install -y \
-    vim-gtk \
+RUN apt-get update && apt-get install -y \
+    vim-gtk3 \
     gcc \
     g++ \
     freeglut3-dev \
@@ -70,10 +70,10 @@ RUN make
 FROM base
 
 # Install select tools we want in the final image
-RUN apt update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
     net-tools \
     tcpdump \
-    netcat \
+    netcat-traditional \
 && rm -rf /var/lib/apt/lists/*
 
 ARG INSTALL="/42"
